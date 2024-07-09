@@ -6,7 +6,7 @@ pipeline {
                     sh 'DevOps_Testing.py'
               	    echo "Successfully created text file" 
               	    }  
-                catch(error)
+            catch(error)
                 {
                     echo "Unsuccessful"
          	    } 
