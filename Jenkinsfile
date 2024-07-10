@@ -1,11 +1,24 @@
-pipeline {  
+pipeline {
     agent any
-        stages {  
-       	    stage("Python scripting testing") {  
-           	    steps {  
-                    sh 'chmod a+rx /home/saransh-verma/Documents/Python/DevOps_Testing.py'
-              	    echo "Successfully created text file" 
-              	    }  
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Check out the repository
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/master']], // or the desired branch
+                    userRemoteConfigs: [[url: 'https://github.com/saranshverma21345/DevOps.git']]
+                ])
+            }
         }
+        
+        stage('Navigate to Folder') {
+            steps {
+                // Change directory to the desired folder
+                dir('/DevOps/blob/master/scripts/DevOps_Testing.py') {
+                    // Here you can add further steps to build/test/deploy
+                    echo 'Now in the desired folder'
+                }
+            }
         }
-}
