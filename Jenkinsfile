@@ -1,5 +1,5 @@
 pipeline {  
-    agent kubernetes 
+    agent any
         stages {  
        	    stage("Python scripting testing") {  
            	    steps {  
