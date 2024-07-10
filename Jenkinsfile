@@ -17,8 +17,8 @@ pipeline {
             steps {
                 // Change directory to the desired folder
                 dir('/DevOps/blob/master/scripts/DevOps_Testing.py') {
-                    // Here you can add further steps to build/test/deploy
-                    echo 'Now in the desired folder'
+                    sh 'DevOps_Testing.py'
+                    echo 'New File created'
                 }
             }
         }
