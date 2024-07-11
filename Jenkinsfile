@@ -16,7 +16,7 @@ pipeline {
         stage('Navigate to Folder') {
             steps {
                 // Change directory to the desired folder
-                dir('/DevOps/blob/master/scripts/DevOps_Testing.py') {
+                dir('/blob/master/scripts/DevOps_Testing.py') {
                     sh 'DevOps_Testing.py'
                     echo 'New File created'
                 }
