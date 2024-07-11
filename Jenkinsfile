@@ -15,13 +15,12 @@ pipeline {
         
         stage('Navigate to Folder') {
             steps {
-                script{
-                def filePath ='/DevOps/blob/master/scripts/DevOps_Testing.py' {
+                // Change directory to the desired folder
+                dir('/blob/master/scripts/DevOps_Testing.py') {
                     sh 'DevOps_Testing.py'
                     echo 'New File created'
                 }
             }
         }
     }
-}
 }
