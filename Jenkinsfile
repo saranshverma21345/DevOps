@@ -12,13 +12,23 @@ pipeline {
                 ])
             }
         }
-        
-        stage('Navigate to Folder') {
+
+        stage('Read File') {
             steps {
-                // Change directory to the desired folder
-                dir('/blob/master/scripts/DevOps_Testing.py') {
-                    sh 'DevOps_Testing.py'
-                    echo 'New File created'
+                script {
+                    // Define the path to the file relative to the repo root
+                    def filePath = 'scripts/DevOps_Testing.py'
+                    
+                    // Check if the file exists
+                    if (fileExists(filePath)) {
+                        echo "File found: ${filePath}"
+                        
+                        // Read the file content
+                        def fileContent = readFile(filePath)
+                        echo "File content: ${fileContent}"
+                    } else {
+                        error "File not found: ${filePath}"
+                    }
                 }
             }
         }
