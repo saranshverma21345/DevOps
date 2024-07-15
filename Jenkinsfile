@@ -39,7 +39,7 @@ pipeline {
         stage('Verify Created File') {
             steps {
                 script {
-                    def createdFilePath = 'path/to/created/file.txt' // Adjust according to your Python script
+                    def createdFilePath = '/var/lib/jenkins/workspace/personal Project_DevOps/CI_VIEW/file.txt' // Adjust according to your Python script
 
                     if (fileExists(createdFilePath)) {
                         echo "File created by Python script found: ${createdFilePath}"
