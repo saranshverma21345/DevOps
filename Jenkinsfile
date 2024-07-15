@@ -28,7 +28,7 @@ pipeline {
                     
                     if (fileExists(scriptPath)) {
                         echo "Script found: ${scriptPath}"
-                        sh 'apt install python3-pip'
+                        sh 'pip install pandas'
                         sh "python3 ${scriptPath}"
                     } else {
                         error "Script not found: ${scriptPath}"
