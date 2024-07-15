@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Check out the repository
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: '*/master']], // or the desired branch
@@ -13,17 +12,22 @@ pipeline {
             }
         }
 
+        stage('Print Workspace Directory') {
+            steps {
+                script {
+                    def workspace = pwd()
+                    echo "Workspace directory: ${workspace}"
+                }
+            }
+        }
+
         stage('Run Python Script') {
             steps {
                 script {
-                    // Define the path to the Python script relative to the repo root
                     def scriptPath = 'scripts/DevOps_Testing.py'
                     
-                    // Check if the script exists
                     if (fileExists(scriptPath)) {
                         echo "Script found: ${scriptPath}"
-                        
-                        // Run the Python script
                         sh "python3 ${scriptPath}"
                     } else {
                         error "Script not found: ${scriptPath}"
@@ -35,14 +39,10 @@ pipeline {
         stage('Verify Created File') {
             steps {
                 script {
-                    // Define the path to the file created by the Python script
-                    def createdFilePath = '/scripts' // Adjust according to your Python script
+                    def createdFilePath = 'path/to/created/file.txt' // Adjust according to your Python script
 
-                    // Check if the file exists
                     if (fileExists(createdFilePath)) {
                         echo "File created by Python script found: ${createdFilePath}"
-                        
-                        // Read and print the file content
                         def fileContent = readFile(createdFilePath)
                         echo "File content: ${fileContent}"
                     } else {
