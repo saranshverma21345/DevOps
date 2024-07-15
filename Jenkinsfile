@@ -13,23 +13,40 @@ pipeline {
             }
         }
 
-        stage('Read File') {
+        stage('Run Python Script') {
             steps {
                 script {
-                    // Define the path to the file relative to the repo root
-                    def filePath = 'scripts/DevOps_Testing.py'
+                    // Define the path to the Python script relative to the repo root
+                    def scriptPath = 'scripts/DevOps_Testing.py'
                     
-                    // Check if the file exists
-                    if (fileExists(filePath)) {
-                        echo "File found: ${filePath}"
-
-                        sh "python3 ${scripts/DevOps_Testing.py}"
+                    // Check if the script exists
+                    if (fileExists(scriptPath)) {
+                        echo "Script found: ${scriptPath}"
                         
-                        // Read the file content
-                        def fileContent = readFile(filePath)
+                        // Run the Python script
+                        sh "python3 ${scriptPath}"
+                    } else {
+                        error "Script not found: ${scriptPath}"
+                    }
+                }
+            }
+        }
+
+        stage('Verify Created File') {
+            steps {
+                script {
+                    // Define the path to the file created by the Python script
+                    def createdFilePath = '/home/saransh-verma/Documents/Python/file.txt' // Adjust according to your Python script
+
+                    // Check if the file exists
+                    if (fileExists(createdFilePath)) {
+                        echo "File created by Python script found: ${createdFilePath}"
+                        
+                        // Read and print the file content
+                        def fileContent = readFile(createdFilePath)
                         echo "File content: ${fileContent}"
                     } else {
-                        error "File not found: ${filePath}"
+                        error "File created by Python script not found: ${createdFilePath}"
                     }
                 }
             }
