@@ -1,7 +1,8 @@
-file_name = "file.txt"
-text = "Test data"
+import pandas as py
 
-with open(file_name,'w') as file:
-    file.write(text)
+py = file_name
+wasd - py.read_html('https://en.wikipedia.org/wiki/The_Sopranos')
 
-print("File '{file_name}' has been created and the message has been written.")
+print(len(wasd))
+
+print(wasd[3])
