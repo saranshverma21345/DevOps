@@ -23,7 +23,7 @@ pipeline {
                     if (fileExists(filePath)) {
                         echo "File found: ${filePath}"
 
-                        sh "python3 $(scripts/DevOps_Testing.py)"
+                        sh "python3 ${scripts/DevOps_Testing.py}"
                         
                         // Read the file content
                         def fileContent = readFile(filePath)
