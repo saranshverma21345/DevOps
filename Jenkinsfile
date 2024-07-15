@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     // Define the path to the file created by the Python script
-                    def createdFilePath = '/home/saransh-verma/Documents/Python/file.txt' // Adjust according to your Python script
+                    def createdFilePath = '/scripts' // Adjust according to your Python script
 
                     // Check if the file exists
                     if (fileExists(createdFilePath)) {
